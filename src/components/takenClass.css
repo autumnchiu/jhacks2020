@@ -4,4 +4,28 @@
     box-sizing: border-box;
   }
 
+.boxboi{
+  resize: vertical; 
+  height: 200px;
+  max-height: 450px;
+  width: 90%;
+  max-width: 90%;
 
+}
+
+.box{
+  background: cadetblue;
+  
+}
+
+.textForm{
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: rgb(255, 255, 255);
+}
+
+.info{
+  background: #53687E;
+  padding-bottom: 30px;
+  padding-top: 20px;
+
+}
