@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import  "./mainPage.css";
+import  "./mainPageA.css";
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -29,31 +29,38 @@ class MainPage extends React.Component {
     return (
       <div className = "div">
       
+      <div className = "inner">
       <form className = "form-style">
       <h1 className = "texts">Hello {this.state.username}</h1>
       <br></br>
       <h1  className = "texts">Start your four year plan with us!</h1>
+      <br></br>
       <label  className = "texts" name = "name">Enter your name: </label>
       <input id = "name"
         type='text'
+        className = "input"
         onChange={this.myChangeHandler}
       />
+      <br></br>
       <br></br>
       <label  className = "texts" name = "grad_yr"> Enter your graduation month and year: </label>
       <input id = "grad_yr"
         type='month'
+        className = "inputGra"
         onChange= {this.gradYearHandler}
       />
       <br></br>
+      <br></br>
       <label  className = "texts" >Enter your major: </label>
-      <select id="major" name="major" onChange = {this.majorHandler}>
+      <select id="major" name="major" className = "input" onChange = {this.majorHandler}>
           <option className= "options">Select One</option>
           <option value="CMSC">CMSC</option>
 
         </select>
       <br></br>
+      <br></br>
       <label  className = "texts" name = "minor">Enter your minor: </label>
-      <select id="minor" name="minor" onChange = {this.minorHandler}>
+      <select id="minor" name="minor" className = "input" onChange = {this.minorHandler}>
           <option className= "options">Select One</option>
           <option value="MATH">MATH</option>
           <option value="ASTR">ASTR</option>
@@ -63,7 +70,7 @@ class MainPage extends React.Component {
       <br></br>
       <input type="submit" value="Submit" onClick = {this.sendHandler} />
       </form>
-
+      </div>
       </div>
 
     );

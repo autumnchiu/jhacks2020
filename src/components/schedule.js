@@ -3,6 +3,7 @@ import "../App.css";
 import "../schedule.css";
 function schedule(props){
     return(
+        <form className = "form-style">
         <div class="box">
             <div class = "year">
                 <div class = "fall">
@@ -48,7 +49,8 @@ function schedule(props){
             <h4>Notes:</h4>
             <br></br>
             <p>{props.notes}</p>
-        </div> 
+        </div>
+        </form>
     );
 }
 
