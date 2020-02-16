@@ -61,7 +61,7 @@ class App extends React.Component {
         {this.state.onTaken
           && <TakenClass parentCallback={this.takenCallBack} />}
         {this.state.onSchedule && <Schedule parentCallBack={this.scheduleCallBack} semestersTaken = {this.state.mainData.semestersTaken}
-        gradYear = {this.state.mainData.gradYear} />}
+        gradYear = {this.state.mainData.grad_year} />}
       </div>
     );
   }
