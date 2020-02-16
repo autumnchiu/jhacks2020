@@ -1,0 +1,19 @@
+{
+  "name": "jhacks2020",
+  "version": "1.0.0",
+  "description": "lol uhh this thing to do a thing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/autumnchiu/jhacks2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/autumnchiu/jhacks2020/issues"
+  },
+  "homepage": "https://github.com/autumnchiu/jhacks2020#readme"
+}
