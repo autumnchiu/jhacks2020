@@ -1,0 +1,25 @@
+.form-style{
+    width: 450px;
+	font-size: 16px;
+	background: #495C70;
+	padding: 30px 30px 15px 30px;
+    border: 5px solid #53687E;
+    justify-content: center;
+}
+.texts{
+    font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 16px;
+	color: #fff;
+}
+
+.div{
+    justify-content: center;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    
+}
+
+.innerDiv{
+    
+}
