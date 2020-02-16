@@ -15,17 +15,19 @@ class Schedule extends React.Component {
     createTable = () => {
 
         let map = new Map();
-        let set0 = ["CMSC131","MATH140","ENGL101"];
-        let set1 = ["CMSC132","MATH141"];
-        let set2 = ["CMSC216","CMSC250","MATH240"];
-        let set3 = ["CMSC330","CMSC351"];
-    
+        let set0 = ["CMSC131","MATH140","ENGL101",null];
+        let set1 = ["CMSC132","MATH141",null];
+        let set2 = ["CMSC216","CMSC250","MATH240",null];
+        let set3 = ["CMSC330","CMSC351",null];
+        
+
     
         map.set(0,set0);
         map.set(1,set1);
         map.set(2,set2);
         map.set(3,set3);
     
+
 
         let startYear = parseInt(this.props.gradYear) - 4;
 
@@ -40,20 +42,31 @@ class Schedule extends React.Component {
         let semTakenIndex = parseInt(this.props.semestersTaken);
         let semestersLeft = 8-this.props.semestersTaken;
         let table = []
-        
+        let genEdNeeded = this.props.genEdNeeded;
         // Outer loop to create parent.  i =ROWS
-        for (let i = 0; i < 4 ; i++) {  
+        for (let i = 0; i < 5 ; i++) {  
           let children = []
           //Inner loop to create children.j = COL
           for (let j = 0; j < semestersLeft; j++) {
               if(i==0){
                 children.push(<td>{`${yearArr[j+semTakenIndex]}`}</td>)
               }else if((j+semTakenIndex)<4){
-                children.push(<td>{`${map.get(j+semTakenIndex).pop()}`}</td>)
+                var temp = map.get(j+semTakenIndex).pop()
+                if(temp!= null){
+                    children.push(<td>{`${temp}`}</td>)
+                }else{
+                    children.push(<td>{genEdNeeded.pop()}</td>)
+                }
 
+              
               }else{
-                children.push(<td>n/a</td>)
+                children.push(<td>{genEdNeeded.pop()}</td>)
               }
+
+            //   if(genEdNeeded.length!=0 && i!=0){
+            //     map.get(j+semTakenIndex).push(genEdNeeded.pop())
+            //   }
+              
           }
 
                     

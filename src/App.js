@@ -67,7 +67,7 @@ class App extends React.Component {
 
   getCoreNeeded = () => {
     console.log(this.state.coreAlreadyTaken)
-    console.log(calculateGenEd.coreNeeded(this.state.coreAlreadyTaken, this.state.mainData.major))
+    //console.log(calculateGenEd.coreNeeded(this.state.coreAlreadyTaken, this.state.mainData.major))
     this.setState({onSchedule: true, onTaken: false})
   }
 
@@ -78,7 +78,7 @@ class App extends React.Component {
         {this.state.onTaken
           && <TakenClass parentCallback={this.takenCallBack} />}
         {this.state.onSchedule && <Schedule parentCallBack={this.scheduleCallBack} semestersTaken={this.state.mainData.semestersTaken}
-          gradYear={this.state.mainData.grad_year} test={this.state.thing}/>}
+          gradYear={this.state.mainData.grad_year} test={this.state.thing} genEdNeeded = {this.state.genEdStillNeeded}/>}
       </div>
     );
   }
