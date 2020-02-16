@@ -21,7 +21,7 @@ class App extends React.Component {
     }
     this.mainCallBack = this.mainCallBack.bind(this)
     this.takenCallBack = this.takenCallBack.bind(this)
-    
+    this.scheduleCallBack = this.scheduleCallBack.bind(this)
   }
 
   mainCallBack = (childData) => {
@@ -29,11 +29,15 @@ class App extends React.Component {
   }
   
   takenCallBack = (childData) => {
-    this.setState({ takenData: childData }, this.processTakenData)
+    this.setState({ takenData: childData,onTaken: false, onSchedule: true }, this.processTakenData)
+  }
+
+  scheduleCallBack = (childData) => {
+    this.setState({scheduleData: childData})
   }
 
   processTakenData = () => {
-    this.setState({ allClasses: parseTakenClasses.listAll(this.state.takenData) });
+    this.setState({ allTakenClasses: parseTakenClasses.listAll(this.state.takenData) });
     this.setState({ genEds: parseTakenClasses.listGenEds(this.state.takenData) });
     
     
@@ -46,6 +50,7 @@ class App extends React.Component {
         {this.state.onMain && <MainPage parentCallback={this.mainCallBack}/>}
         {this.state.onTaken
           && <TakenClass parentCallback={this.takenCallBack} />}
+        {this.state.onSchedule && <Schedule parentCallBack={this.scheduleCallBack} allTakenClasses={this.allTakenClasses} />}
       </div>
     );
   }
