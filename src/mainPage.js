@@ -9,20 +9,24 @@ class MainPage extends React.Component {
   myChangeHandler = (event) => {
     this.setState({username: event.target.value + "!"});
   }
+  sendHandler = () => {
+    this.props.parentCallback(this.state);
+  }
   render() {
     return (
       <div class = "div">
+      <div class = "innerDiv">
       <form className = "form-style">
       <h1 class = "texts">Hello {this.state.username}</h1>
       <br></br>
       <h1  class = "texts">Start your four year plan with us!</h1>
-      <label  class = "texts" for ="name">Enter your name: </label>
+      <label  class = "texts" for ="name" name = "name">Enter your name: </label>
       <input id = "name"
         type='text'
         onChange={this.myChangeHandler}
       />
       <br></br>
-      <label  class = "texts" for = "grad_yr"> Enter your graduation month and year: </label>
+      <label  class = "texts" for = "grad_yr" name = "grad_yr"> Enter your graduation month and year: </label>
       <input id = "grad_yr"
         type='month'
         
@@ -42,8 +46,9 @@ class MainPage extends React.Component {
 
         </select>
       <br></br>
-
+      <input type="submit" value="Submit" onClick = {this.sendHandler} />
       </form>
+      </div>
       </div>
     );
   }
