@@ -1,7 +1,7 @@
 import React, {useState, Component} from 'react';
 import Schedule from "./components/schedule";
 import calculateGenEd from './controller/calculateGenEd.js';
-import parseGenEds from './controller/handleAPI.js';
+import handleAPI from './controller/handleAPI.js';
 import parseTakenClasses from "./controller/parseTakenClasses.js";
 import TakenClass from "./components/takenClass.js";
 import MainPage from "./components/mainPage.js";
@@ -22,12 +22,13 @@ class App extends React.Component {
       takenData: [],
       scheduleData: [],
       main_childData: [],
-      thing:[]
+      thing: []
     }
     this.mainCallBack = this.mainCallBack.bind(this)
     this.takenCallBack = this.takenCallBack.bind(this)
     this.scheduleCallBack = this.scheduleCallBack.bind(this)
     this.dumbCallBack = this.dumbCallBack.bind(this)
+    this.anotherCallBack = this.anotherCallBack.bind(this)
   }
 
   mainCallBack = (childData) => {
@@ -47,7 +48,7 @@ class App extends React.Component {
   }
 
   populateGenEds = () => {
-    this.setState({ thing: parseGenEds(this.state.allClasses, this.state.specialGenEds, this.dumbCallBack) })
+    this.setState({ thing: handleAPI.parseGenEds(this.state.allClasses, this.state.specialGenEds, this.dumbCallBack) })
   }
 
   dumbCallBack = (result) => {
@@ -55,8 +56,19 @@ class App extends React.Component {
   }
 
   getClassesNeeded = () => {
-    console.log("geneds still needed: " + calculateGenEd.genEdNeeded(this.state.thing))
-    this.setState({ onTaken: false, onSchedule: true });
+    this.setState({ genEdStillNeeded: calculateGenEd.genEdNeeded(this.state.thing) }, handleAPI.getGenEdsCredits(this.state.allClasses, this.anotherCallBack))
+    
+  }
+
+  anotherCallBack = (result) => {
+    console.log(result)
+    this.setState({ coreAlreadyTaken: result }, this.getCoreNeeded)
+  }
+
+  getCoreNeeded = () => {
+    console.log(this.state.coreAlreadyTaken)
+    console.log(calculateGenEd.coreNeeded(this.state.coreAlreadyTaken, this.state.mainData.major))
+    this.setState({onSchedule: true, onTaken: false})
   }
 
   render() {

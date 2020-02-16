@@ -11,17 +11,45 @@ function parseGenEds(courseList, weirdClassThings, dumbCallBack) {
 
     Promise.all(asyncCalls)
         .then(result => {
-            console.log("hi2")
-            console.log(JSON.parse(result[0])[0])
-            finalResult.push(parseGenEdsHelper(JSON.parse(result[0]), weirdClassThings))
-            console.log(finalResult.flat())
-            dumbCallBack(finalResult.flat())
+            for (let x in result) {
+                finalResult.push(parseGenEdsHelper(JSON.parse(result[x])[0], weirdClassThings))
+            }
+            console.log(finalResult)
+            console.log(finalResult.flat(2))
+            dumbCallBack(finalResult.flat(2))
         })
         .catch(err => {
             console.log("couldn't find class")
         })
 
+}
 
+function getGenEdsCredits(courseList, anotherCallBack) {
+    let asyncCalls = [];
+    let finalResult = [];
+    for (const x in courseList) {
+        var url = 'https://api.umd.io/v0/courses?course_id=' + courseList[x]
+        console.log("adding async call to URL " + url)
+        asyncCalls.push(asyncFunctionCall(url))
+    }
+
+    Promise.all(asyncCalls)
+        .then(result => {
+            console.log(result)
+            for (let x in result) {
+                var temp = JSON.parse(result[x])[0];
+                console.log(temp)
+                if (temp.gen_ed.length === 0) {
+                    finalResult.push({courseName: temp.name, credits: temp.credits})
+                }
+            }
+            console.log(finalResult)
+            console.log(finalResult.flat(2))
+            anotherCallBack(finalResult.flat(2))
+        })
+        .catch(err => {
+            console.log("couldn't find class")
+        })
 }
 
 function asyncFunctionCall(url) {
@@ -46,14 +74,23 @@ function asyncFunctionCall(url) {
 }
 
 function parseGenEdsHelper(data, weirdClassThings) {
-    console.log(weirdClassThings[0])
-    var name = data[0].course_id;
-    var gen_ed = data[0].gen_ed;
+    var result = [];
+    console.log("in helper: ")
+    console.log(data)
+    var name = data.course_id;
+    console.log(name)
+    var gen_ed = data.gen_ed;
+    console.log(gen_ed)
     var toTake = weirdClassThings.find(x => x.name === name);
     if (!toTake) {
+        if (gen_ed) {
+            console.log("here")
+            result.push(gen_ed)
+            console.log("after push")
+            return result
+        }
         return [];
     }
-    var result = [];
 
     for (var x in toTake.gen_ed) {
         var regex = new RegExp(toTake.gen_ed[x], 'g');
@@ -76,4 +113,4 @@ function parseGenEdsHelper(data, weirdClassThings) {
     }
 }
 
-export default parseGenEds;
+export default { parseGenEds, getGenEdsCredits };
