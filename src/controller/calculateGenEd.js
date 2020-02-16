@@ -34,10 +34,9 @@ function coreNeeded(coreTaken, upperLevel){
         if (core.includes(z.courseName)) {
             var counterCore = 0;
             for (var a in core) {
-                if (core[counterCore] === a.courseName){
-                    core.splice(counterCore, 1);
+                if (core[a] === z.courseName){
+                    core.splice(a, 1);
                 }
-                counterCore++;
             }
         } else if (coreUpperLevels.includes(z.courseName)) {
             if (upperLevelCredits > 0){
@@ -52,8 +51,8 @@ function coreNeeded(coreTaken, upperLevel){
         }  else if (math.includes(z.courseName)) {
             var counterMath = 0;
             for (var a in math) {
-                if (math[counterMath] === a.courseName){
-                    core.splice(counterMath, 1);
+                if (math[a] === z.courseName){
+                    core.splice(a, 1);
                 }
                 counterMath++;
             }
