@@ -55,7 +55,6 @@ function coreNeeded(coreTaken, upperLevel){
                 if (math[a] === z.courseName){
                     core.splice(a, 1);
                 }
-                counterMath++;
             }
         } else if (z.courseName.charAt(0) === "S") {
             if (statistics == true) {
@@ -103,7 +102,7 @@ function coreNeeded(coreTaken, upperLevel){
                 needed.add(course);
                 upperLevelCredits -= 3;
                 if (upperLevelCredits < 1){
-                    checker = false;
+                    checker = true;
                 }
             }
         }
