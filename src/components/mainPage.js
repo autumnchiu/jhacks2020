@@ -12,34 +12,49 @@ class MainPage extends React.Component {
   sendHandler = () => {
     this.props.parentCallback(this.state);
   }
+  gradYearHandler = (event) => {
+    this.setState({grad_year: event.target.value})
+    
+  }
+
+  majorHandler = (event) => {
+    this.setState({major: event.target.value})
+  }
+
+  minorHandler = (event) => {
+    this.setState({major: event.target.value})
+  }
+
   render() {
     return (
-      <div class = "div">
-      <div class = "innerDiv">
-      <div className = "form-style">
-      <h1 class = "texts">Hello {this.state.username}</h1>
+      <div className = "div">
+      
+      <form className = "form-style">
+      <h1 className = "texts">Hello {this.state.username}</h1>
       <br></br>
-      <h1  class = "texts">Start your four year plan with us!</h1>
-      <label  class = "texts" for ="name" name = "name">Enter your name: </label>
+      <h1  className = "texts">Start your four year plan with us!</h1>
+      <label  className = "texts" name = "name">Enter your name: </label>
       <input id = "name"
         type='text'
         onChange={this.myChangeHandler}
       />
       <br></br>
-      <label  class = "texts" for = "grad_yr" name = "grad_yr"> Enter your graduation month and year: </label>
+      <label  className = "texts" name = "grad_yr"> Enter your graduation month and year: </label>
       <input id = "grad_yr"
         type='month'
-        
+        onChange= {this.gradYearHandler}
       />
       <br></br>
-      <label  class = "texts" for ="major">Enter your major: </label>
-      <select id="major" name="major">
+      <label  className = "texts" >Enter your major: </label>
+      <select id="major" name="major" onChange = {this.majorHandler}>
+          <option className= "options">Select One</option>
           <option value="CMSC">CMSC</option>
 
         </select>
       <br></br>
-      <label  class = "texts" for ="minor">Enter your minor: </label>
-      <select id="minor" name="minor">
+      <label  className = "texts" name = "minor">Enter your minor: </label>
+      <select id="minor" name="minor" onChange = {this.minorHandler}>
+          <option className= "options">Select One</option>
           <option value="MATH">MATH</option>
           <option value="ASTR">ASTR</option>
           <option value="LING">LING</option>
@@ -47,9 +62,10 @@ class MainPage extends React.Component {
         </select>
       <br></br>
       <input type="submit" value="Submit" onClick = {this.sendHandler} />
+      </form>
+
       </div>
-      </div>
-      </div>
+
     );
   }
 }
