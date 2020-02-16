@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: '' };
+    this.state = { username: '',grad_year: 0, major: "", minor: "" };
   }
   myChangeHandler = (event) => {
     this.setState({username: event.target.value});
@@ -19,6 +19,8 @@ class MainPage extends React.Component {
         type='text'
         onChange={this.myChangeHandler}
       />
+      <br></br>
+      
       </form>
     );
   }
