@@ -38,7 +38,8 @@ class MainPage extends React.Component {
 
       <h1  className = "texts">Start your four year plan with us!</h1>
       <br></br>
-      <label  className = "texts" name = "name">Enter your name: </label>
+      <label  className = "texts" name = "name">Enter your name:</label>
+      <br></br>
       <input id = "name"
         type='text'
         className = "input"
@@ -54,16 +55,16 @@ class MainPage extends React.Component {
       />
       <br></br>
       <br></br>
-      <label  className = "texts" >Enter your major: </label>
-      <select id="major" name="major" className = "input" onChange = {this.majorHandler}>
+      <label  className = "dropl" >Enter your major: </label>
+      <select id="major" name="major" className = "input" id="dropdown" onChange = {this.majorHandler}>
           <option className= "options">Select One</option>
           <option value="CMSC">CMSC</option>
 
         </select>
       <br></br>
       <br></br>
-      <label  className = "texts" name = "minor">Enter your minor: </label>
-      <select id="minor" name="minor" className = "input" onChange = {this.minorHandler}>
+      <label  className = "dropl" name = "minor">Enter your minor: </label>
+      <select id="minor" name="minor" className = "input" id="dropdown" onChange = {this.minorHandler}>
           <option className= "options">Select One</option>
           <option value="MATH">MATH</option>
           <option value="ASTR">ASTR</option>
@@ -71,13 +72,16 @@ class MainPage extends React.Component {
 
         </select>
       <br></br>
-      <label  className = "texts" name = "semestersTaken"> Enter the number of semesters you've FINSIHED at UMD: </label>
+      <br></br>
+      <label  className = "texts"  name = "semestersTaken"> Enter the number of semesters you've FINSIHED at UMD: </label>
       <input id = "semestersTaken"
         type="text"
+        className = "input"
         onChange= {this.semestersTakenHandler}
       />
       <br></br>
-      <input type="submit" value="Submit" onClick = {this.sendHandler} />
+      <br></br>
+      <input type="submit"  value="Submit" onClick = {this.sendHandler} />
       </form>
       </div >
       </div>

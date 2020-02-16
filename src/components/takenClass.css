@@ -5,8 +5,12 @@
   }
 
 .boxboi{
-  width: 300px;
+  resize: vertical; 
   height: 200px;
+  max-height: 450px;
+  width: 90%;
+  max-width: 90%;
+
 }
 
 .box{
