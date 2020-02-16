@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import Hello from './sayHello';
-import Tweet from "./Tweet";
-import { unstable_renderSubtreeIntoContainer } from 'react-dom';
+import MainPage from "./MainPage";
+// import Hello from './components/sayHello';
 
 
-const https = use("https");
+
+const https = require("https");
 
 function App(){
+  
   const [isRed, setRed] = useState(false);
   const [count, setCount] = useState(42068);
   const [user, setUsers] = useState([
@@ -19,12 +20,13 @@ function App(){
   }
   return(
     <div>
-      {user.map(user =>(
+      <MainPage/>
+      {/* {user.map(user =>(
         <Tweet name ={user.name} message = {user.message}/>
-      ))}
+      ))} */}
    
       <h1> Hello Eric u dumb</h1>
-      <Hello />
+      {/* <Hello /> */}
       {/* <Tweet name = "samson" />
       <Tweet name = "eric"/>
       <Tweet name = "dumdumAidan"/> */}
