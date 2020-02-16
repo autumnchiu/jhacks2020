@@ -1,9 +1,31 @@
 const https = require("https");
 
-function parseGenEds(courseList, weirdClassThings, dumbCallBack) {
-    let result = {};
+function parseGenEds(courseList, weirdClassThings) {
+    let asyncCalls = [];
+    let finalResult = [];
     for (const x in courseList) {
         var url = 'https://api.umd.io/v0/courses?course_id=' + courseList[x]
+        console.log("adding async call to URL " + url)
+        asyncCalls.push(asyncFunctionCall(url))
+    }
+
+    Promise.all(asyncCalls)
+        .then(result => {
+            console.log("hi2")
+            console.log(JSON.parse(result[0])[0])
+            finalResult.push(parseGenEdsHelper(JSON.parse(result[0]), weirdClassThings))
+            console.log(finalResult.flat())
+            return finalResult.flat()
+        })
+        .catch(err => {
+            console.log("couldn't find class")
+        })
+
+
+}
+
+function asyncFunctionCall(url) {
+    return new Promise((resolve, reject) => {
         https.get(url, (res) => {
             let data = '';
 
@@ -12,16 +34,15 @@ function parseGenEds(courseList, weirdClassThings, dumbCallBack) {
             })
 
             res.on('end', () => {
-                result += parseGenEdsHelper(JSON.parse(data), weirdClassThings)
+                console.log("hi")
+                resolve(data)
             })
 
                 .on('error', (err) => {
-                alert("could not find course " + courseList[x])
-            })
+                    reject("could not find course")
+                })
         })
-    }
-
-    dumbCallBack(result)
+    })
 }
 
 function parseGenEdsHelper(data, weirdClassThings) {
@@ -49,8 +70,11 @@ function parseGenEdsHelper(data, weirdClassThings) {
 
     console.log(result)
     
-
-    return result;
+    if (result) {
+        return result
+    } else {
+        return null
+    }
 }
 
 export default parseGenEds;
