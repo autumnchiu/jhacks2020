@@ -1,9 +1,16 @@
 function genEdNeeded(genEdTaken){
     // Taken from https://www.cs.umd.edu/~nelson/advising/docs/DegreeRequirementsGenEd.pdf
     var needed = ["FSAW", "FSPW", "FSOC", "FSMA", "FSAR", "DSNL", "DSNS", "DSNL", "DSHU", "DSHU", "DSHS", "DSHS", "DSSP", "DSSP", "SCIS", "SCIS", "DVUP", "DVUP", "DVCC"];
+<<<<<<< HEAD
+    var counter = 0;
+    for (var y in needed){
+        if (genEdTaken.includes(y)) {
+            needed.splice(counter, 1);
+=======
     for (const y in needed){
         if (genEdTaken.includes(needed[y])) {
             needed.splice(y, 1);
+>>>>>>> f9d4732dacdaedf161d68f871b3c29b1aedc75ee
         }
     }
     return needed;
