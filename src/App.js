@@ -1,10 +1,10 @@
 import React, {useState, Component} from 'react';
 import Schedule from "./components/schedule";
-import calculateGenEd from './controller/calculateGenEd';
+import calculateGenEd from './controller/calculateGenEd.js';
 import parseGenEds from './controller/handleAPI.js';
 import parseTakenClasses from "./controller/parseTakenClasses.js";
-import TakenClass from "./components/takenClass.js"
-import MainPage from "./components/mainPage.js"
+import TakenClass from "./components/takenClass.js";
+import MainPage from "./components/mainPage.js";
 
 import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
@@ -21,7 +21,8 @@ class App extends React.Component {
       mainData: [],
       takenData: [],
       scheduleData: [],
-      main_childData :[]
+      main_childData: [],
+      thing:[]
     }
     this.mainCallBack = this.mainCallBack.bind(this)
     this.takenCallBack = this.takenCallBack.bind(this)
@@ -34,7 +35,7 @@ class App extends React.Component {
   }
 
   takenCallBack = (childData) => {
-    this.setState({ takenData: childData,onTaken: false, onSchedule: true }, this.processTakenData)
+    this.setState({ takenData: childData }, this.processTakenData)
   }
 
   scheduleCallBack = (childData) => {
@@ -50,9 +51,13 @@ class App extends React.Component {
   }
 
   dumbCallBack = (result) => {
-    console.log(result);
+    this.setState({thing: result}, this.getClassesNeeded)
   }
 
+  getClassesNeeded = () => {
+    console.log("geneds still needed: " + calculateGenEd.genEdNeeded(this.state.thing))
+    this.setState({ onTaken: false, onSchedule: true });
+  }
 
   render() {
     return (
@@ -60,8 +65,8 @@ class App extends React.Component {
         {this.state.onMain && <MainPage parentCallback={this.mainCallBack}/>}
         {this.state.onTaken
           && <TakenClass parentCallback={this.takenCallBack} />}
-        {this.state.onSchedule && <Schedule parentCallBack={this.scheduleCallBack} semestersTaken = {this.state.mainData.semestersTaken}
-        gradYear = {this.state.mainData.grad_year} />}
+        {this.state.onSchedule && <Schedule parentCallBack={this.scheduleCallBack} semestersTaken={this.state.mainData.semestersTaken}
+          gradYear={this.state.mainData.grad_year} test={this.state.thing}/>}
       </div>
     );
   }
