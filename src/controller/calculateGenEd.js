@@ -12,6 +12,7 @@ function genEdNeeded(genEdTaken){
 }
 
 function coreNeeded(coreTaken, upperLevel){
+    var coreTaken2 = [].concat(coreTaken);
     var needed = [];
     var coreUpperLevels = ("CMSC411", "CMSC412",
     "CMSC414", "CMSC417", "CMSC420", "CMSC422", "CMSC423", 
@@ -25,62 +26,132 @@ function coreNeeded(coreTaken, upperLevel){
     var mathHigher = ["MATHXXX", "AMSCXXX", "STATXXX"];
     var upperLevelCredits = 15;
     var upperLevelElectives = 6;
-    var electives = 0;
+    var electives = 12;
     var statistics = true;
     var mathUpper = true;
-    for (const z in coreTaken){
-        if (core.includes(z)) {
+    
+    coreTaken2.forEach( function(z) {
+        console.log(z)
+        console.log("coursename: " +z.courseName)
+        if (core.includes(z.courseName)) {
             var counterCore = 0;
             for (var a in core) {
-                if (core[counterCore] === a){
+                if (core[counterCore] === a.courseName){
                     core.splice(counterCore, 1);
                 }
                 counterCore++;
             }
-        } else if (coreUpperLevels.includes(z)) {
+        } else if (coreUpperLevels.includes(z.courseName)) {
             if (upperLevelCredits > 0){
-                upperLevelCredits -= 3;
-            } else if (upperLevelElectives > 0) {
+                if (z.courseName == "CMSC412") {
+                    upperLevelCredits -= 3;
+                } else {
+                    upperLevelCredits -= 3;
+                }
+            } else if (upperLevelCredits <= 0) {
                 upperLevelElectives -= 3;
             }
-        }  else if (math.includes(z)) {
+        }  else if (math.includes(z.courseName)) {
             var counterMath = 0;
-            for (const a in math) {
-                if (math[counterMath] === a){
+            for (var a in math) {
+                if (math[counterMath] === a.courseName){
                     core.splice(counterMath, 1);
                 }
                 counterMath++;
             }
-        } else if (z.charAt(0) === "S") {
+        } else if (z.courseName.charAt(0) === "S") {
             if (statistics == true) {
-                if (z.charAt(1) === "T" && z.charAt(2) === "A" && z.charAt(3) === "T" && z.charAt(4) === "4") {
+                if (z.courseName.charAt(1) === "T" && z.courseName.charAt(2) === "A" && z.courseName.charAt(3) === "T" && z.courseName.charAt(4) === "4") {
                     statistics = false;
                 }
             } else if (statistics == false) {
-                if (z.charAt(1) === "T" && z.charAt(2) === "A" && z.charAt(3) === "T") {
+                if (z.courseName.charAt(1) === "T" && z.courseName.charAt(2) === "A" && z.courseName.charAt(3) === "T") {
                     mathUpper = false;
                 }
-            } else if (mathUpper == false) {
-                if (z.charAt(1) === "T" && z.charAt(2) === "A" && z.charAt(3) === "T" && (z.charAt(4) === "4" || z.charAt(4) === "3")) {
+            } else if (mathUpper == false && upperLevel === "STAT") {
+                if (z.courseName.charAt(1) === "T" && z.courseName.charAt(2) === "A" && z.courseName.charAt(3) === "T" && (z.courseName.charAt(4) === "4" || z.courseName.charAt(4) === "3")) {
                     electives -= 3;
                 }
             }
-        } else if ((z.charAt(0) === "M" && z.charAt(1) === "A" && z.charAt(2) && "T", z.charAt(3) && "H")
-         || (z.charAt(0) === "A" && z.charAt(1) === "M" && z.charAt(2) === "S" && z.charAt(3) === "C")) {
-<<<<<<< HEAD
+        } else if ((z.courseName.charAt(0) === "M" && z.courseName.charAt(1) === "A" && z.courseName.charAt(2) && "T", z.courseName.charAt(3) && "H")
+         || (z.courseName.charAt(0) === "A" && z.courseName.charAt(1) === "M" && z.courseName.charAt(2) === "S" && z.courseName.charAt(3) === "C")) {
              mathUpper == false;
-        } else if (z.charAt(0) === "A" && z.charAt(1) === "S" && z.charAt(2) === "T" && z.charAt(3) === "R" && (z.charAt(4) === "4" || z.charAt(4) === "3")) {
-=======
-             mathUpper = false;
-         } else if (z.charAt(0) === "A" && z.charAt(1) === "S" && z.charAt(2) === "T" && z.charAt(3) === "R" && (z.charAt(4) === "4" || z.charAt(4) === "3")) {
->>>>>>> 7c133c366c5e6d4eb28ae26fd6c41d8819212b1d
+        } else if (upperLevel === "ASTR" && z.courseName.charAt(0) === "A" && z.courseName.charAt(1) === "S" && z.courseName.charAt(2) === "T" && z.courseName.charAt(3) === "R" && (z.courseName.charAt(4) === "4" || z.charAt(4) === "3")) {
              electives -= 3;
-        } else if (z.charAt(0) === "L" && z.charAt(1) === "I" && z.charAt(2) === "N" && z.charAt(3) === "G" && (z.charAt(4) === "4" || z.charAt(4) === "3")) {
+        } else if (upperLevel === "LING" && z.courseName.charAt(0) === "L" && z.courseName.charAt(1) === "I" && z.courseName.charAt(2) === "N" && z.courseName.charAt(3) === "G" && (z.courseName.charAt(4) === "4" || z.courseName.charAt(4) === "3")) {
+            electives -= 3;
+        } else if (!(coreUpperLevels.includes(z)) && (z.courseName.charAt(0) === "C" && z.courseName.charAt(1) === "M" && z.courseName.charAt(2) && "S", z.courseName.charAt(3) === "C") && (z.courseName.charAt(4) === "4" || z.courseName.charAt(4) === "3")){
+            electives -= z.credits;
+        }
+    })
+    needed.push(core);
+    needed.push(math);
+    if (statistics === true){
+        needed.push(stat);
+    }
+    if (mathUpper === true){
+        needed.push({courseName: "MATHXXX"});
+    }
+    var checker = false;
+    if (upperLevelCredits > 0) {
+        upperLevelCreditsArray = Array.from(coreUpperLevels);
+        while (checker === false) {
+            course = upperLevelCreditsArray[Math.floor(Math.random() * upperLevelCreditsArray.length)];
+            if (!(coreUpperLevels.includes(course))) {
+                needed.add(course);
+                upperLevelCredits -= 3;
+                if (upperLevelCredits < 1){
+                    checker = false;
+                }
+            }
+        }
+    }
+    if (upperLevelElectives > 0) {
+        if (upperLevelElectives % 3 != 0) {
+            if (upperLevelElectives < 4) {
+                for (upperLevelElectives; upperLevelElectives > 0; upperLevelElectives--){
+                    needed.add({courseName: "CMSCXXX", credits: 1});
+                }
+            } else {
+                for (upperLevelElectives; upperLevelElectives > 3; upperLevelElectives--){
+                    needed.add({courseName: "CMSCXXX", credits: 1});
+                } 
+            }
+        } else {
+            for (upperLevelElectives; upperLevelElectives > 0; upperLevelElectives -= 3){
+                needed.add({courseName: "CMSCXXX", credits: 3});    
+            }
+       }
+    }
+    if (upperLevel === ASTR){
+        while(electives > 0){
+            needed.add({courseName: "ASTRXXX", credits: 3});
+            electives -= 3;
+        }
+    }
+    if (upperLevel === STAT){
+        while(electives > 0){
+            needed.add({courseName: "STATXXX", credits: 3});
+            electives -= 3;
+        }
+    }
+    if (upperLevel === LING){
+        while(electives > 0){
+            needed.add({courseName: "LINGXXX", credits: 3});
             electives -= 3;
         }
     }
 
-
+    return needed;
 }
 
-export { genEdNeeded, coreNeeded };
+var me1 = new Object();
+me1.courseName = "CMSC131"
+me1.credits = 2;
+var arr = [];
+arr.push(me1.courseName);
+
+console.log(coreNeeded(me1,"LING"))
+
+
+// export { genEdNeeded, coreNeeded };
