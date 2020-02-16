@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import "./takenClass.css";
 
-class takenClass extends React.Component {
+class TakenClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = { classes: '' };
@@ -9,12 +9,12 @@ class takenClass extends React.Component {
   myChangeHandler = (event) => {
     this.setState({classes: event.target.value});
   }
-  sendHandler = () => {
+  sendHandler = (e) => {
     this.props.parentCallback(this.state.classes);
   }
   render() {
     return (
-      <form>
+      <div>
         <h2>Input the classes you have taken (for example: CMSC131) in the text box below, each class seperated by commas.</h2>
         <br></br>
         <p>If you have taken a Gen-Ed where you have a choice as to what requirement it fullfills, state what you are having it count for (for example: ARHU275 DSSP)</p>
@@ -26,10 +26,10 @@ class takenClass extends React.Component {
       />
       
       <br></br>
-      <button onClick = {this.sendHandler}>Process</button>
-      </form> 
+        <button onClick={this.sendHandler}>Process</button>
+        </div>
     );
   }
 }
 
-export default MainPage;
+export default TakenClass;
