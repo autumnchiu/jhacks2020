@@ -17,7 +17,11 @@ class App extends React.Component {
     this.state = {
       onMain: true,
       onTaken: false,
-      onSchedule: false
+      onSchedule: false,
+      mainData: [],
+      takenData: [],
+      scheduleData: [],
+      main_childData :[]
     }
     this.mainCallBack = this.mainCallBack.bind(this)
     this.takenCallBack = this.takenCallBack.bind(this)
@@ -56,7 +60,8 @@ class App extends React.Component {
         {this.state.onMain && <MainPage parentCallback={this.mainCallBack}/>}
         {this.state.onTaken
           && <TakenClass parentCallback={this.takenCallBack} />}
-        {this.state.onSchedule && <Schedule parentCallBack={this.scheduleCallBack} allTakenClasses={this.allTakenClasses} />}
+        {this.state.onSchedule && <Schedule parentCallBack={this.scheduleCallBack} semestersTaken = {this.state.mainData.semestersTaken}
+        gradYear = {this.state.mainData.gradYear} />}
       </div>
     );
   }
