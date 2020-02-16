@@ -1,6 +1,7 @@
 import React from 'react';
 import "../App.css";
 import "../schedule.css";
+
 class Schedule extends React.Component {
     constructor(props) {
       super(props);
@@ -10,9 +11,22 @@ class Schedule extends React.Component {
     sendHandler = () => {
       this.props.parentCallback(this.state);
     }
-
+    
     createTable = () => {
-   
+
+        let map = new Map();
+        let set0 = ["CMSC131","MATH140","ENGL101"];
+        let set1 = ["CMSC132","MATH141"];
+        let set2 = ["CMSC216","CMSC250","MATH240"];
+        let set3 = ["CMSC330","CMSC351"];
+    
+    
+        map.set(0,set0);
+        map.set(1,set1);
+        map.set(2,set2);
+        map.set(3,set3);
+    
+
         let startYear = parseInt(this.props.gradYear) - 4;
 
         let yearArr = [];
@@ -23,22 +37,29 @@ class Schedule extends React.Component {
             yearArr.push("Fall " + i.toString());
             yearArr.push("Spring " + (i+1).toString());
         }
-
+        let semTakenIndex = this.props.semestersTaken-1;
         let semestersLeft = 8-this.props.semestersTaken;
         let table = []
         
         // Outer loop to create parent.  i =ROWS
-        for (let i = 0; i < 4 ; i++) {
+        for (let i = 0; i < 4 ; i++) {  
           let children = []
           //Inner loop to create children.j = COL
           for (let j = 0; j < semestersLeft; j++) {
-              if (i== 0){
-                children.push(<td>{`${yearArr[j+(8-semestersLeft)]}`}</td>)
-              }else{
-                  children.push(<td>{`Class ${i}`}</td>)
-              }
+              if(i==0){
+                children.push(<td>{`${yearArr[j]}`}</td>)
+              }else if(j<4){
+                children.push(<td>{`${map.get(j).pop()}`}</td>)
 
+              }else{
+                children.push(<td>n/a</td>)
+              }
           }
+
+                    
+              
+
+          
           //Create the parent and add the children
           table.push(<tr>{children}</tr>)
         }
