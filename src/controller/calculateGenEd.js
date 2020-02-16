@@ -11,6 +11,7 @@ function genEdNeeded(genEdTaken){
 
 function coreNeeded(coreTaken, upperLevel){
     var coreTaken2 = [].concat(coreTaken);
+    console.log(coreTaken2)
     var needed = [];
     var coreUpperLevels = ("CMSC411", "CMSC412",
     "CMSC414", "CMSC417", "CMSC420", "CMSC422", "CMSC423", 
