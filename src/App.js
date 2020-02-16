@@ -17,11 +17,16 @@ class App extends React.Component {
     this.state = {
       onMain: true,
       onTaken: false,
-      onSchedule: false
+      onSchedule: false,
+      mainData: [],
+      takenData: [],
+      scheduleData: [],
+      main_childData :[]
     }
     this.mainCallBack = this.mainCallBack.bind(this)
     this.takenCallBack = this.takenCallBack.bind(this)
     this.scheduleCallBack = this.scheduleCallBack.bind(this)
+    this.dumbCallBack = this.dumbCallBack.bind(this)
   }
 
   mainCallBack = (childData) => {
@@ -41,7 +46,11 @@ class App extends React.Component {
   }
 
   populateGenEds = () => {
-    alert(JSON.stringify(parseGenEds(this.state.allClasses, this.state.specialGenEds)));
+    this.setState({ thing: parseGenEds(this.state.allClasses, this.state.specialGenEds, this.dumbCallBack) })
+  }
+
+  dumbCallBack = (result) => {
+    console.log(result);
   }
 
 
@@ -51,7 +60,8 @@ class App extends React.Component {
         {this.state.onMain && <MainPage parentCallback={this.mainCallBack}/>}
         {this.state.onTaken
           && <TakenClass parentCallback={this.takenCallBack} />}
-        {this.state.onSchedule && <Schedule parentCallBack={this.scheduleCallBack} allTakenClasses={this.allTakenClasses} />}
+        {this.state.onSchedule && <Schedule parentCallBack={this.scheduleCallBack} semestersTaken = {this.state.mainData.semestersTaken}
+        gradYear = {this.state.mainData.grad_year} />}
       </div>
     );
   }

@@ -77,6 +77,10 @@ function coreNeeded(coreTaken, upperLevel){
          || (z.courseName.charAt(0) === "A" && z.courseName.charAt(1) === "M" && z.courseName.charAt(2) === "S" && z.courseName.charAt(3) === "C")) {
              mathUpper == false;
         } else if (upperLevel === "ASTR" && z.courseName.charAt(0) === "A" && z.courseName.charAt(1) === "S" && z.courseName.charAt(2) === "T" && z.courseName.charAt(3) === "R" && (z.courseName.charAt(4) === "4" || z.charAt(4) === "3")) {
+        } else if ((z.charAt(0) === "M" && z.charAt(1) === "A" && z.charAt(2) && "T", z.charAt(3) && "H")
+        || (z.charAt(0) === "A" && z.charAt(1) === "M" && z.charAt(2) === "S" && z.charAt(3) === "C")) {
+            mathUpper = false;
+       } else if (z.charAt(0) === "A" && z.charAt(1) === "S" && z.charAt(2) === "T" && z.charAt(3) === "R" && (z.charAt(4) === "4" || z.charAt(4) === "3")) {
              electives -= 3;
         } else if (upperLevel === "LING" && z.courseName.charAt(0) === "L" && z.courseName.charAt(1) === "I" && z.courseName.charAt(2) === "N" && z.courseName.charAt(3) === "G" && (z.courseName.charAt(4) === "4" || z.courseName.charAt(4) === "3")) {
             electives -= 3;
