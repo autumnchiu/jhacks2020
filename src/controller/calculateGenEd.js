@@ -75,7 +75,7 @@ function coreNeeded(coreTaken, upperLevel){
             }
         } else if ((z.courseName.charAt(0) === "M" && z.courseName.charAt(1) === "A" && z.courseName.charAt(2) && "T", z.courseName.charAt(3) && "H")
          || (z.courseName.charAt(0) === "A" && z.courseName.charAt(1) === "M" && z.courseName.charAt(2) === "S" && z.courseName.charAt(3) === "C")) {
-             mathUpper == false;
+             mathUpper = false;
         } else if (upperLevel === "ASTR" && z.courseName.charAt(0) === "A" && z.courseName.charAt(1) === "S" && z.courseName.charAt(2) === "T" && z.courseName.charAt(3) === "R" && (z.courseName.charAt(4) === "4" || z.charAt(4) === "3")) {
         } else if ((z.charAt(0) === "M" && z.charAt(1) === "A" && z.charAt(2) && "T", z.charAt(3) && "H")
         || (z.charAt(0) === "A" && z.charAt(1) === "M" && z.charAt(2) === "S" && z.charAt(3) === "C")) {
@@ -98,9 +98,9 @@ function coreNeeded(coreTaken, upperLevel){
     }
     var checker = false;
     if (upperLevelCredits > 0) {
-        upperLevelCreditsArray = Array.from(coreUpperLevels);
+        let upperLevelCreditsArray = Array.from(coreUpperLevels);
         while (checker === false) {
-            course = upperLevelCreditsArray[Math.floor(Math.random() * upperLevelCreditsArray.length)];
+            let course = upperLevelCreditsArray[Math.floor(Math.random() * upperLevelCreditsArray.length)];
             if (!(coreUpperLevels.includes(course))) {
                 needed.add(course);
                 upperLevelCredits -= 3;
@@ -127,19 +127,19 @@ function coreNeeded(coreTaken, upperLevel){
             }
        }
     }
-    if (upperLevel === ASTR){
+    if (upperLevel === "ASTR"){
         while(electives > 0){
             needed.add({courseName: "ASTRXXX", credits: 3});
             electives -= 3;
         }
     }
-    if (upperLevel === STAT){
+    if (upperLevel === "STAT"){
         while(electives > 0){
             needed.add({courseName: "STATXXX", credits: 3});
             electives -= 3;
         }
     }
-    if (upperLevel === LING){
+    if (upperLevel === "LING"){
         while(electives > 0){
             needed.add({courseName: "LINGXXX", credits: 3});
             electives -= 3;
