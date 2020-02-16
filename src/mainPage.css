@@ -4,6 +4,7 @@
 	background: #495C70;
 	padding: 30px 30px 15px 30px;
     border: 5px solid #53687E;
+    background-color:#53687E ;
     justify-content: center;
 }
 .texts{
@@ -13,17 +14,17 @@
 }
 
 .div{
-    justify-content: center;
+    /* justify-content: center;
     display: inline-block;
     text-align: center;
-    align-items: center;
-    
-    
+    align-items: center; */
+    background-color: cadetblue;
 }
 *{
     margin-right: 50px;
     margin-left: 70px;
-    margin-top: 20px;
+    margin-top: 25px;
     padding: 0;
     box-sizing: border-box;
+
   }
