@@ -1,6 +1,6 @@
 const https = require("https");
 
-function parseGenEds(courseList, weirdClassThings) {
+function parseGenEds(courseList, weirdClassThings, dumbCallBack) {
     let asyncCalls = [];
     let finalResult = [];
     for (const x in courseList) {
@@ -15,7 +15,7 @@ function parseGenEds(courseList, weirdClassThings) {
             console.log(JSON.parse(result[0])[0])
             finalResult.push(parseGenEdsHelper(JSON.parse(result[0]), weirdClassThings))
             console.log(finalResult.flat())
-            return finalResult.flat()
+            dumbCallBack(finalResult.flat())
         })
         .catch(err => {
             console.log("couldn't find class")
@@ -60,7 +60,6 @@ function parseGenEdsHelper(data, weirdClassThings) {
         for (var y in gen_ed) {
             console.log(gen_ed[y])
             if ((gen_ed[y].match(/(FSAW|FSPW|FSOC|FSMA|FSAR|DSNL|DSNS|DSHS|DSHU|DSSP|SCIS|DVUP|DVCC)(FSAW|FSPW|FSOC|FSMA|FSAR|DSNL|DSNS|DSHS|DSHU|DSSP|SCIS|DVUP|DVCC)/)) && gen_ed[y].match(regex)) {
-                alert("here")
                 result.push(toTake.gen_ed[x]);
             } else {
                 result.push(gen_ed[y]);
