@@ -22,6 +22,7 @@ class App extends React.Component {
     this.mainCallBack = this.mainCallBack.bind(this)
     this.takenCallBack = this.takenCallBack.bind(this)
     this.scheduleCallBack = this.scheduleCallBack.bind(this)
+    this.dumbCallBack = this.dumbCallBack.bind(this)
   }
 
   mainCallBack = (childData) => {
@@ -41,7 +42,11 @@ class App extends React.Component {
   }
 
   populateGenEds = () => {
-    alert(JSON.stringify(parseGenEds(this.state.allClasses, this.state.specialGenEds)));
+    this.setState({ thing: parseGenEds(this.state.allClasses, this.state.specialGenEds, this.dumbCallBack) })
+  }
+
+  dumbCallBack = (result) => {
+    console.log(result);
   }
 
 
