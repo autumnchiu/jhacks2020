@@ -37,7 +37,7 @@ class Schedule extends React.Component {
             yearArr.push("Fall " + i.toString());
             yearArr.push("Spring " + (i+1).toString());
         }
-        let semTakenIndex = this.props.semestersTaken-1;
+        let semTakenIndex = parseInt(this.props.semestersTaken);
         let semestersLeft = 8-this.props.semestersTaken;
         let table = []
         
@@ -47,9 +47,9 @@ class Schedule extends React.Component {
           //Inner loop to create children.j = COL
           for (let j = 0; j < semestersLeft; j++) {
               if(i==0){
-                children.push(<td>{`${yearArr[j]}`}</td>)
-              }else if(j<4){
-                children.push(<td>{`${map.get(j).pop()}`}</td>)
+                children.push(<td>{`${yearArr[j+semTakenIndex]}`}</td>)
+              }else if((j+semTakenIndex)<4){
+                children.push(<td>{`${map.get(j+semTakenIndex).pop()}`}</td>)
 
               }else{
                 children.push(<td>n/a</td>)
