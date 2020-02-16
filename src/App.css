@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.helloButton{
+  background-color: #4CAF50; /* Green */
+}
+
+.tweet{
+  border: 2px;
+  border-color: black;
+}
+
+.red{
+  color: red;
+  font-size: 50px;
+}
