@@ -4,7 +4,6 @@ function listGenEds(classes) {
 
     for (var x in classesList) {
         var temp = classesList[x].split(" ");
-        alert(temp);
         if (temp.length !== 1) {
             results.push({
                 name: temp.shift(),

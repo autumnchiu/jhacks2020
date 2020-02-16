@@ -1,10 +1,31 @@
 const https = require("https");
 
-function parseGenEds(courseList, weirdClassThings) {
-    console.log(JSON.stringify(weirdClassThings))
-    let result = {};
+function parseGenEds(courseList, weirdClassThings, dumbCallBack) {
+    let asyncCalls = [];
+    let finalResult = [];
     for (const x in courseList) {
         var url = 'https://api.umd.io/v0/courses?course_id=' + courseList[x]
+        console.log("adding async call to URL " + url)
+        asyncCalls.push(asyncFunctionCall(url))
+    }
+
+    Promise.all(asyncCalls)
+        .then(result => {
+            console.log("hi2")
+            console.log(JSON.parse(result[0])[0])
+            finalResult.push(parseGenEdsHelper(JSON.parse(result[0]), weirdClassThings))
+            console.log(finalResult.flat())
+            dumbCallBack(finalResult.flat())
+        })
+        .catch(err => {
+            console.log("couldn't find class")
+        })
+
+
+}
+
+function asyncFunctionCall(url) {
+    return new Promise((resolve, reject) => {
         https.get(url, (res) => {
             let data = '';
 
@@ -13,44 +34,46 @@ function parseGenEds(courseList, weirdClassThings) {
             })
 
             res.on('end', () => {
-                data = JSON.parse(JSON.stringify(data))
-                result += parseGenEdsHelper(data, weirdClassThings)
+                console.log("hi")
+                resolve(data)
             })
 
                 .on('error', (err) => {
-                alert("could not find course " + courseList[x])
-            })
+                    reject("could not find course")
+                })
         })
-    }
-
-    return result;
+    })
 }
 
 function parseGenEdsHelper(data, weirdClassThings) {
-    var name = data.course_id;
-    alert("name: " + name)
-    var gen_ed = data.gen_ed;
-    var toTake = weirdClassThings.find(x => x === name);
+    console.log(weirdClassThings[0])
+    var name = data[0].course_id;
+    var gen_ed = data[0].gen_ed;
+    var toTake = weirdClassThings.find(x => x.name === name);
     if (!toTake) {
         return [];
     }
-    alert("here")
     var result = [];
 
     for (var x in toTake.gen_ed) {
         var regex = new RegExp(toTake.gen_ed[x], 'g');
         for (var y in gen_ed) {
-            if ((gen_ed[y].match(/FSAW|FSPW|FSOC|FSMA|FSAR|DSNL|DSNS|DSHS|DSHU|DSSP|SCIS|DVUP|DVCC/)).length() > 1 && gen_ed[y].match(regex)) {
-                alert("here")
+            console.log(gen_ed[y])
+            if ((gen_ed[y].match(/(FSAW|FSPW|FSOC|FSMA|FSAR|DSNL|DSNS|DSHS|DSHU|DSSP|SCIS|DVUP|DVCC)(FSAW|FSPW|FSOC|FSMA|FSAR|DSNL|DSNS|DSHS|DSHU|DSSP|SCIS|DVUP|DVCC)/)) && gen_ed[y].match(regex)) {
                 result.push(toTake.gen_ed[x]);
             } else {
                 result.push(gen_ed[y]);
             }
         }
     }
-    
 
-    return result;
+    console.log(result)
+    
+    if (result) {
+        return result
+    } else {
+        return null
+    }
 }
 
 export default parseGenEds;

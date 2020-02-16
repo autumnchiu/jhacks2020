@@ -12,6 +12,12 @@ class TakenClass extends React.Component {
   sendHandler = (e) => {
     this.props.parentCallback(this.state.classes);
   }
+
+  sentHandlerWithEnter = (e) => {
+    if(e.key==='Enter'){
+      this.props.parentCallback(this.state.classes);
+    }
+  }
   render() {
     return (
       <div className="box">
@@ -35,7 +41,7 @@ class TakenClass extends React.Component {
       </textarea>
      
       <br></br>
-        <button onClick={this.sendHandler}>Process</button>
+        <button onClick={this.sendHandler} onKeyPress= {this.sentHandlerWithEnter}>Process</button>
         </div>
         </div>
     );

@@ -4,7 +4,7 @@ import  "./mainPageA.css";
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: '',grad_year: 0, major: "", minor: "" };
+    this.state = { username: '',grad_year: 0, major: "", minor: "", semestersTaken: 0 };
   }
   myChangeHandler = (event) => {
     this.setState({username: event.target.value + "!"});
@@ -25,14 +25,17 @@ class MainPage extends React.Component {
     this.setState({major: event.target.value})
   }
 
+  semestersTakenHandler = (event) =>{
+    this.setState({semestersTaken: event.target.value})
+  }
+
   render() {
     return (
       <div className = "div">
-      
-      <div className = "inner">
+      <div className = "innerdiv">
       <form className = "form-style">
       <h1 className = "texts">Hello {this.state.username}</h1>
-      <br></br>
+
       <h1  className = "texts">Start your four year plan with us!</h1>
       <br></br>
       <label  className = "texts" name = "name">Enter your name: </label>
@@ -68,9 +71,15 @@ class MainPage extends React.Component {
 
         </select>
       <br></br>
+      <label  className = "texts" name = "semestersTaken"> Enter the number of semesters you've FINSIHED at UMD: </label>
+      <input id = "semestersTaken"
+        type="text"
+        onChange= {this.semestersTakenHandler}
+      />
+      <br></br>
       <input type="submit" value="Submit" onClick = {this.sendHandler} />
       </form>
-      </div>
+      </div >
       </div>
 
     );
