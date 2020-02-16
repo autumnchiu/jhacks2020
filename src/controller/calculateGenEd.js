@@ -67,13 +67,8 @@ function coreNeeded(coreTaken, upperLevel){
             }
         } else if ((z.charAt(0) === "M" && z.charAt(1) === "A" && z.charAt(2) && "T", z.charAt(3) && "H")
          || (z.charAt(0) === "A" && z.charAt(1) === "M" && z.charAt(2) === "S" && z.charAt(3) === "C")) {
-<<<<<<< HEAD
-             mathUpper == false;
-        } else if (z.charAt(0) === "A" && z.charAt(1) === "S" && z.charAt(2) === "T" && z.charAt(3) === "R" && (z.charAt(4) === "4" || z.charAt(4) === "3")) {
-=======
              mathUpper = false;
-         } else if (z.charAt(0) === "A" && z.charAt(1) === "S" && z.charAt(2) === "T" && z.charAt(3) === "R" && (z.charAt(4) === "4" || z.charAt(4) === "3")) {
->>>>>>> 7c133c366c5e6d4eb28ae26fd6c41d8819212b1d
+        } else if (z.charAt(0) === "A" && z.charAt(1) === "S" && z.charAt(2) === "T" && z.charAt(3) === "R" && (z.charAt(4) === "4" || z.charAt(4) === "3")) {
              electives -= 3;
         } else if (z.charAt(0) === "L" && z.charAt(1) === "I" && z.charAt(2) === "N" && z.charAt(3) === "G" && (z.charAt(4) === "4" || z.charAt(4) === "3")) {
             electives -= 3;
