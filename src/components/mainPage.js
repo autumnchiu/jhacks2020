@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import  "./mainPageA.css";
+import "./turtle.jpg"
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -31,11 +32,14 @@ class MainPage extends React.Component {
 
   render() {
     return (
+      
       <div className = "div">
       <div className = "innerdiv">
       <form className = "form-style">
+      <h1 className = "PLANtudo">PLANtudo</h1>
+  
       <h1 className = "texts">Hello {this.state.username}</h1>
-
+      
       <h1  className = "texts">Start your four year plan with us!</h1>
       <br></br>
       <label  className = "texts" name = "name">Enter your name:</label>
@@ -49,7 +53,7 @@ class MainPage extends React.Component {
       <br></br>
       <label  className = "texts" name = "grad_yr"> Enter your graduation month and year: </label>
       <input id = "grad_yr"
-        type='month'
+        type='text'
         className = "inputGra"
         onChange= {this.gradYearHandler}
       />
@@ -81,6 +85,7 @@ class MainPage extends React.Component {
       />
       <br></br>
       <br></br>
+      
       <input type="submit"  value="Submit" onClick = {this.sendHandler} />
       </form>
       </div >
