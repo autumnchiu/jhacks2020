@@ -1,7 +1,7 @@
 import React, {useState, Component} from 'react';
 import Schedule from "./components/schedule";
 import calculateGenEd from './controller/calculateGenEd';
-import handleAPI from './controller/handleAPI.js';
+import parseGenEds from './controller/handleAPI.js';
 import parseTakenClasses from "./controller/parseTakenClasses.js";
 import TakenClass from "./components/takenClass.js"
 import MainPage from "./components/mainPage.js"
@@ -33,10 +33,11 @@ class App extends React.Component {
   }
 
   processTakenData = () => {
-    this.setState({ allClasses: parseTakenClasses.listAll(this.state.takenData) });
-    this.setState({ genEds: parseTakenClasses.listGenEds(this.state.takenData) });
-    
-    
+    this.setState({ allClasses: parseTakenClasses.listAll(this.state.takenData) }, this.setState({ specialGenEds: parseTakenClasses.listGenEds(this.state.takenData) }, this.populateGenEds));
+  }
+
+  populateGenEds = () => {
+    alert(JSON.stringify(parseGenEds(this.state.allClasses, this.state.specialGenEds)));
   }
     
   

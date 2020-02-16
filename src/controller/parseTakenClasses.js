@@ -2,8 +2,6 @@ function listGenEds(classes) {
     var classesList = classes.split(',').map(x => x.trim());
     var results = [];
 
-    alert(classesList)
-
     for (var x in classesList) {
         var temp = classesList[x].split(" ");
         alert(temp);
