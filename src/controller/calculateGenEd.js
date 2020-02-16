@@ -1,16 +1,9 @@
 function genEdNeeded(genEdTaken){
     // Taken from https://www.cs.umd.edu/~nelson/advising/docs/DegreeRequirementsGenEd.pdf
     var needed = ["FSAW", "FSPW", "FSOC", "FSMA", "FSAR", "DSNL", "DSNS", "DSNL", "DSHU", "DSHU", "DSHS", "DSHS", "DSSP", "DSSP", "SCIS", "SCIS", "DVUP", "DVUP", "DVCC"];
-<<<<<<< HEAD
-    var counter = 0;
-    for (var y in needed){
-        if (genEdTaken.includes(y)) {
-            needed.splice(counter, 1);
-=======
     for (const y in needed){
         if (genEdTaken.includes(needed[y])) {
             needed.splice(y, 1);
->>>>>>> f9d4732dacdaedf161d68f871b3c29b1aedc75ee
         }
     }
     return needed;
@@ -41,10 +34,9 @@ function coreNeeded(coreTaken, upperLevel){
         if (core.includes(z.courseName)) {
             var counterCore = 0;
             for (var a in core) {
-                if (core[counterCore] === a.courseName){
-                    core.splice(counterCore, 1);
+                if (core[a] === z.courseName){
+                    core.splice(a, 1);
                 }
-                counterCore++;
             }
         } else if (coreUpperLevels.includes(z.courseName)) {
             if (upperLevelCredits > 0){
@@ -59,8 +51,8 @@ function coreNeeded(coreTaken, upperLevel){
         }  else if (math.includes(z.courseName)) {
             var counterMath = 0;
             for (var a in math) {
-                if (math[counterMath] === a.courseName){
-                    core.splice(counterMath, 1);
+                if (math[a] === z.courseName){
+                    core.splice(a, 1);
                 }
                 counterMath++;
             }
